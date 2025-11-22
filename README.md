@@ -34,8 +34,8 @@ A modern, feature-rich content management system built with Laravel 12 for manag
 
 - **Backend**: Laravel 12 (PHP 8.2+)
 - **Frontend**: Blade templates with Quill.js rich text editor
-- **Database**: MySQL/PostgreSQL/SQLite
-- **Authentication**: Laravel Breeze/Jetstream compatible
+- **Database**: SQLite (default), MySQL, PostgreSQL supported
+- **Authentication**: Custom authentication system built with Laravel's core Auth
 - **JavaScript**: Quill.js for rich text editing
 
 ## 📋 Requirements
@@ -43,14 +43,14 @@ A modern, feature-rich content management system built with Laravel 12 for manag
 - PHP 8.2 or higher
 - Composer
 - Node.js and NPM
-- MySQL/PostgreSQL/SQLite database
+- SQLite database (default), with MySQL/PostgreSQL support available
 - Web server (Apache/Nginx)
 
 ## 🚀 Installation & Setup
 
 ### 1. Clone the Repository
 ```bash
-git clone <your-repository-url>
+git clone <https://github.com/cs-del/test-voila>
 cd voila
 ```
 
@@ -70,10 +70,27 @@ php artisan key:generate
 
 ### 4. Configure Environment Variables
 Edit `.env` file and update the following:
+
+**For SQLite (default - no additional configuration needed):**
+```env
+DB_CONNECTION=sqlite
+```
+
+**For MySQL:**
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
+DB_DATABASE=voila_db
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+**For PostgreSQL:**
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
 DB_DATABASE=voila_db
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
@@ -138,7 +155,9 @@ This starts:
 ## 🔧 Configuration
 
 ### Admin User Setup
-1. Register a new account through the registration form
+The system uses a custom authentication system built from scratch. To create an admin user:
+
+1. Register a new account through the registration form (default role: 'user')
 2. Update the user's role in the database or via tinker:
    ```bash
    php artisan tinker
@@ -264,56 +283,3 @@ chmod -R 755 storage/
 chmod -R 755 bootstrap/cache/
 ```
 
-### Environment Checklist
-- [ ] Set `APP_ENV=production` in `.env`
-- [ ] Set `APP_DEBUG=false` in `.env`
-- [ ] Configure proper database credentials
-- [ ] Set up proper file storage
-- [ ] Configure web server (Apache/Nginx)
-- [ ] Set up SSL certificate
-- [ ] Configure backup strategy
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🆘 Support & Documentation
-
-For additional help and documentation:
-- Check the `USER_MANUAL.md` file for detailed user instructions
-- Review the Laravel documentation: https://laravel.com/docs
-- Create an issue on GitHub for bug reports
-
-## 🔄 Version History
-
-- **v1.0.0** - Initial release with core CMS functionality
-  - Article and category management
-  - User authentication and roles
-  - Comment system with moderation
-  - Contact form
-  - Admin dashboard
-
-## 🎨 Customization
-
-### Styling
-- Modify `resources/css/app.css` for custom styles
-- Update Blade templates in `resources/views/` for layout changes
-- Configure Quill.js editor settings in `package.json`
-
-### Functionality
-- Add new models and controllers for additional features
-- Extend the existing models with custom methods
-- Create new routes in `routes/web.php`
-- Add middleware for additional access control
-
----
-
-**Happy Blogging with VOILA CMS! 🚀**
